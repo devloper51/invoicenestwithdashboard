@@ -10,9 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.3",
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.1.6",
+    "date-fns": "^4.1.0",
+    "html2pdf.js": "^0.10.3",
+    "pdfmake": "^0.2.20",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2",
+    "react-intersection-observer": "^9.16.0",
+    "react-router-dom": "^7.6.0",
     "tailwindcss": "^4.1.6"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import { 
   DocumentTextIcon,
   UserGroupIcon,
@@ -95,6 +96,11 @@ const features = [
 
 const Home = () => {
   const [showDemo, setShowDemo] = useState(false)
+
+  const { ref: featuresRef, inView: featuresInView } = useInView({ triggerOnce: true, threshold: 0.2 })
+  const { ref: whyChooseRef, inView: whyChooseInView } = useInView({ triggerOnce: true, threshold: 0.2 })
+  const { ref: testimonialsRef, inView: testimonialsInView } = useInView({ triggerOnce: true, threshold: 0.2 })
+  const { ref: footerCtaRef, inView: footerCtaInView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
   return (
     <div className="bg-gradient-to-b from-[#F8F9FA] via-[#E8F6F3] to-[#F8F9FA]">
@@ -231,13 +237,16 @@ const Home = () => {
       )}
 
       {/* Features Section */}
-      <div className="py-24 bg-gradient-to-br from-[#E8F6F3] via-white to-[#F0F9F7]">
+      <div 
+        ref={featuresRef}
+        className={`py-24 bg-gradient-to-br from-[#E8F6F3] via-white to-[#F0F9F7] ${featuresInView ? 'animate-fade-in' : 'opacity-0'}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-[#2C3E50] sm:text-5xl animate-fade-in">
+            <h2 className={`text-4xl font-extrabold text-[#2C3E50] sm:text-5xl ${featuresInView ? 'animate-fade-in' : 'opacity-0'}`}>
               Everything You <span className="text-[#1ABC9C]">Need</span>
             </h2>
-            <p className="mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto">
+            <p className={`mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto ${featuresInView ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: featuresInView ? '0.2s' : '0s' }}>
               Powerful features designed to streamline your invoicing process and grow your business
             </p>
           </div>
@@ -246,8 +255,8 @@ const Home = () => {
             {features.map((feature, idx) => (
               <div
                 key={feature.name}
-                className="group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in"
-                style={{ animationDelay: `${idx * 0.1}s` }}
+                className={`group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${featuresInView ? 'animate-fade-in' : 'opacity-0'}`}
+                style={{ animationDelay: featuresInView ? `${idx * 0.1 + 0.3}s` : '0s' }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1ABC9C] to-[#16A085] opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300" />
                 <div className="relative">
@@ -278,13 +287,16 @@ const Home = () => {
       </div>
 
       {/* Why Choose InvoiceNest Section */}
-      <div className="py-24 bg-gradient-to-br from-[#F0F9F7] via-[#E8F6F3] to-[#E3F4F1]">
+      <div 
+        ref={whyChooseRef}
+        className={`py-24 bg-gradient-to-br from-[#F0F9F7] via-[#E8F6F3] to-[#E3F4F1] ${whyChooseInView ? 'animate-fade-in' : 'opacity-0'}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-[#2C3E50] sm:text-5xl animate-fade-in">
+            <h2 className={`text-4xl font-extrabold text-[#2C3E50] sm:text-5xl ${whyChooseInView ? 'animate-fade-in' : 'opacity-0'}`}>
               Why Choose <span className="text-[#1ABC9C]">InvoiceNest</span>?
             </h2>
-            <p className="mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto">
+            <p className={`mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto ${whyChooseInView ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: whyChooseInView ? '0.2s' : '0s' }}>
               Join thousands of businesses that trust InvoiceNest for their invoicing needs
             </p>
           </div>
@@ -293,8 +305,8 @@ const Home = () => {
             {whyChoose.map((item, idx) => (
               <div 
                 key={item.title} 
-                className="group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in"
-                style={{ animationDelay: `${idx * 0.1}s` }}
+                className={`group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${whyChooseInView ? 'animate-fade-in' : 'opacity-0'}`}
+                style={{ animationDelay: whyChooseInView ? `${idx * 0.1 + 0.3}s` : '0s' }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`} />
                 <div className="relative">
@@ -325,13 +337,16 @@ const Home = () => {
       </div>
 
       {/* Testimonials Section */}
-      <div className="py-24 bg-gradient-to-br from-[#E3F4F1] via-[#E8F6F3] to-[#F0F9F7]">
+      <div 
+        ref={testimonialsRef}
+        className={`py-24 bg-gradient-to-br from-[#E3F4F1] via-[#E8F6F3] to-[#F0F9F7] ${testimonialsInView ? 'animate-fade-in' : 'opacity-0'}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-[#2C3E50] sm:text-5xl animate-fade-in">
+            <h2 className={`text-4xl font-extrabold text-[#2C3E50] sm:text-5xl ${testimonialsInView ? 'animate-fade-in' : 'opacity-0'}`}>
               What Our <span className="text-[#1ABC9C]">Users Say</span>
             </h2>
-            <p className="mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto">
+            <p className={`mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto ${testimonialsInView ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: testimonialsInView ? '0.2s' : '0s' }}>
               Join thousands of satisfied businesses that have transformed their invoicing process
             </p>
           </div>
@@ -340,8 +355,8 @@ const Home = () => {
             {testimonials.map((testimonial, idx) => (
               <div 
                 key={idx}
-                className="group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in"
-                style={{ animationDelay: `${idx * 0.1}s` }}
+                className={`group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${testimonialsInView ? 'animate-fade-in' : 'opacity-0'}`}
+                style={{ animationDelay: testimonialsInView ? `${idx * 0.1 + 0.3}s` : '0s' }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1ABC9C] to-[#16A085] opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300" />
                 <div className="relative">
@@ -376,19 +391,22 @@ const Home = () => {
       </div>
 
       {/* Footer CTA */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#1ABC9C] to-[#16A085] py-20">
+      <div 
+        ref={footerCtaRef}
+        className={`relative overflow-hidden bg-gradient-to-br from-[#1ABC9C] to-[#16A085] py-20 ${footerCtaInView ? 'animate-fade-in' : 'opacity-0'}`}
+      >
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-[#1ABC9C]/80 via-[#E8F6F3]/60 to-[#16A085]/80 opacity-80" />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYtMi42ODYgNi02cy0yLjY4Ni02LTYtNi02IDIuNjg2LTYgNiAyLjY4NiA2IDYgNnptMCAyYy0zLjMxNCAwLTYgMi42ODYtNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnptMCAyYzMuMzE0IDAgNiAyLjY4NiA2IDZzLTIuNjg2IDYtNiA2LTYtMi42ODYtNi02IDIuNjg2LTYgNi02eiIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuMSIvPjwvZz48L3N2Zz4=')] opacity-10" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-extrabold text-white sm:text-5xl mb-6 animate-fade-in">
+        <div className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center ${footerCtaInView ? 'animate-fade-in' : 'opacity-0'}`}>
+          <h2 className={`text-4xl font-extrabold text-white sm:text-5xl mb-6 ${footerCtaInView ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: footerCtaInView ? '0.1s' : '0s' }}>
             Ready to Get Paid Faster?
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+          <p className={`text-xl text-white/90 mb-8 max-w-3xl mx-auto ${footerCtaInView ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: footerCtaInView ? '0.2s' : '0s' }}>
             Join thousands of businesses that trust InvoiceNest for their invoicing needs. Start your free trial today.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 ${footerCtaInView ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: footerCtaInView ? '0.3s' : '0s' }}>
             <Link
               to="/signup"
               className="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-[#1ABC9C] bg-white hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg"

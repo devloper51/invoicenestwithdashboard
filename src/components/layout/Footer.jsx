@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Footer = () => {
   const navigation = {
@@ -53,18 +53,22 @@ const Footer = () => {
     ],
   }
 
+  const getFooterNavLinkClass = ({ isActive }) => {
+    return `text-base transition-colors duration-200 ${isActive ? 'text-[#1ABC9C] font-semibold' : 'text-[#ECF0F1] hover:text-[#1ABC9C]'}`;
+  };
+
   return (
     <footer className="bg-[#2C3E50]">
       <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
           {navigation.main.map((item) => (
             <div key={item.name} className="px-5 py-2">
-              <Link
+              <NavLink
                 to={item.href}
-                className="text-base text-[#ECF0F1] hover:text-[#1ABC9C] transition-colors duration-200"
+                className={getFooterNavLinkClass}
               >
                 {item.name}
-              </Link>
+              </NavLink>
             </div>
           ))}
         </nav>
@@ -73,10 +77,10 @@ const Footer = () => {
             <a
               key={item.name}
               href={item.href}
-              className="text-[#ECF0F1] hover:text-[#1ABC9C] transition-colors duration-200"
+              className="text-[#ECF0F1] hover:text-[#1ABC9C] transition-colors duration-200 group"
             >
               <span className="sr-only">{item.name}</span>
-              <item.icon className="h-6 w-6" aria-hidden="true" />
+              <item.icon className="h-6 w-6 text-[#ECF0F1] group-hover:text-[#1ABC9C] transition-colors duration-200" aria-hidden="true" />
             </a>
           ))}
         </div>

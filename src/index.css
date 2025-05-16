@@ -1,1 +1,54 @@
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+/* Gradient animation for Hero */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 10s ease infinite;
+}
+
+/* Slower bounce for Get Started button */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 1.5s infinite;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Force all colors to RGB/HEX for PDF rendering to avoid oklch issues */
+.invoice-pdf-root, .invoice-pdf-root * {
+  color: #222 !important;
+  background: #fff !important;
+  border-color: #222 !important;
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const Navbar = () => {
@@ -10,7 +10,17 @@ const Navbar = () => {
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
     { name: 'Subscription', href: '/subscription' },
+    { name: 'Temp Dashboard', href: '/dashboard' },
   ]
+
+  // Define base and active classes for NavLink
+  const getNavLinkClass = ({ isActive }) => {
+    return `px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive ? 'bg-[#1ABC9C] text-white' : 'text-[#ECF0F1] hover:text-[#1ABC9C]'}`;
+  };
+
+  const getMobileNavLinkClass = ({ isActive }) => {
+    return `block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActive ? 'bg-[#1ABC9C] text-white' : 'text-[#ECF0F1] hover:text-[#1ABC9C]'}`;
+  };
 
   return (
     <nav className="fixed w-full bg-[#2C3E50] shadow-md z-50">
@@ -27,13 +37,13 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navigation.map((item) => (
-                <Link
+                <NavLink
                   key={item.name}
                   to={item.href}
-                  className="text-[#ECF0F1] hover:text-[#1ABC9C] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  className={getNavLinkClass}
                 >
                   {item.name}
-                </Link>
+                </NavLink>
               ))}
             </div>
           </div>
@@ -41,13 +51,19 @@ const Navbar = () => {
           {/* Auth Buttons */}
           <div className="hidden md:block">
             <div className="ml-4 flex items-center space-x-4">
-              <Link
+              <NavLink
+                to="/dashboard"
+                className={getNavLinkClass}
+              >
+                Temp Dashboard
+              </NavLink>
+              <NavLink
                 to="/login"
-                className="text-[#ECF0F1] hover:text-[#1ABC9C] px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className={getNavLinkClass} // Login might not need active state, but using NavLink for consistency
               >
                 Login
-              </Link>
-              <Link
+              </NavLink>
+              <Link // Sign Up is a button, so Link might be more appropriate than NavLink if no active state needed
                 to="/signup"
                 className="bg-[#1ABC9C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#16A085] transition-colors duration-200"
               >
@@ -77,24 +93,31 @@ const Navbar = () => {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navigation.map((item) => (
-              <Link
+              <NavLink
                 key={item.name}
                 to={item.href}
-                className="text-[#ECF0F1] hover:text-[#1ABC9C] block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setIsMenuOpen(false)}
+                className={getMobileNavLinkClass}
+                onClick={() => setIsMenuOpen(false)} // Close menu on click
               >
                 {item.name}
-              </Link>
+              </NavLink>
             ))}
+            <NavLink
+              to="/dashboard"
+              className={getMobileNavLinkClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Temp Dashboard
+            </NavLink>
             <div className="pt-4 pb-3 border-t border-[#34495E]">
-              <Link
+              <NavLink
                 to="/login"
-                className="text-[#ECF0F1] hover:text-[#1ABC9C] block px-3 py-2 rounded-md text-base font-medium"
+                className={getMobileNavLinkClass} // Login in mobile
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login
-              </Link>
-              <Link
+              </NavLink>
+              <Link // Sign Up in mobile
                 to="/signup"
                 className="bg-[#1ABC9C] text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-[#16A085] mt-2"
                 onClick={() => setIsMenuOpen(false)}

@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
 // Layout Components
-import Navbar from './components/layout/Navbar'
-import Footer from './components/layout/Footer'
+// import Navbar from './components/layout/Navbar' // No longer imported directly here
+// import Footer from './components/layout/Footer' // No longer imported directly here
+import PublicLayout from './layouts/PublicLayout' // Import the new PublicLayout
+import DashboardLayout from './layouts/DashboardLayout'
 
 // Public Pages
 import Home from './pages/public/Home'
@@ -22,19 +24,24 @@ import Payment from './pages/public/Payment'
 import Dashboard from './pages/dashboard/Dashboard'
 import CreateInvoice from './pages/dashboard/CreateInvoice'
 import Invoices from './pages/dashboard/Invoices'
-import InvoicePreview from './pages/dashboard/InvoicePreview'
+// import InvoicePreview from './pages/dashboard/InvoicePreview'
 import Profile from './pages/dashboard/Profile'
-import DashboardLayout from './layouts/DashboardLayout'
+import Clients from './pages/dashboard/Clients'
+import Settings from './pages/dashboard/Settings'
+import AddClient from './pages/dashboard/AddClient'
+import ClientDetail from './pages/dashboard/ClientDetail'
+import EditClient from './pages/dashboard/EditClient'
+import EditInvoice from './pages/dashboard/EditInvoice'
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-[#F8F9FA]">
         <Toaster position="top-center" />
-        <Navbar />
-        <main className="pt-16"> {/* pt-16 to account for fixed navbar */}
-          <Routes>
-            {/* Public Routes */}
+        {/* <Navbar /> */} {/* Removed from here */}
+        <Routes>
+          {/* Public Routes */}
+          <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
@@ -44,22 +51,31 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
-            
-            {/* Protected Routes */}
-            <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="create-invoice" element={<CreateInvoice />} />
-              <Route path="my-invoices" element={<Invoices />} />
-              <Route path="invoice/:id" element={<InvoicePreview />} />
-              <Route path="profile" element={<Profile />} />
-            </Route>
-            
-            {/* Error Routes */}
+            {/* Error Routes can also be nested if they should share the public layout */}
             <Route path="/error" element={<Error />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
+          </Route>
+          
+          {/* Protected Routes */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="create-invoice" element={<CreateInvoice />} />
+            <Route path="my-invoices" element={<Invoices />} />
+            {/* <Route path="invoice/:id" element={<InvoicePreview />} /> */}
+            <Route path="profile" element={<Profile />} />
+            <Route path="clients" element={<Clients />} />
+            <Route path="clients/new" element={<AddClient />} />
+            <Route path="clients/:id" element={<ClientDetail />} />
+            <Route path="clients/edit/:id" element={<EditClient />} />
+            <Route path="invoices/edit/:id" element={<EditInvoice />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          
+          {/* Standalone Error Routes (if they shouldn't have PublicLayout) */}
+          {/* <Route path="/error" element={<Error />} /> */}
+          {/* <Route path="*" element={<NotFound />} /> */}
+        </Routes>
+        {/* <Footer /> */} {/* Removed from here */}
       </div>
     </Router>
   )

@@ -9,13 +9,6 @@ import {
   ShieldCheckIcon
 } from '@heroicons/react/24/outline'
 
-const stats = [
-  { label: 'Active Users', value: '50,000+' },
-  { label: 'Invoices Generated', value: '1M+' },
-  { label: 'Countries Served', value: '150+' },
-  { label: 'Customer Satisfaction', value: '99%' }
-]
-
 const values = [
   {
     icon: HeartIcon,
@@ -57,13 +50,6 @@ const differentiators = [
   }
 ];
 
-const milestones = [
-  { year: '2019', event: 'InvoiceNest founded with a vision to simplify invoicing.' },
-  { year: '2020', event: 'Reached 10,000 users and launched mobile support.' },
-  { year: '2021', event: 'Expanded to 100+ countries and introduced analytics dashboard.' },
-  { year: '2023', event: 'Surpassed 1 million invoices generated and 99% customer satisfaction.' }
-];
-
 const impactStats = [
   { label: 'Businesses Empowered', value: '50,000+' },
   { label: 'Invoices Generated', value: '1,000,000+' },
@@ -81,10 +67,10 @@ const About = () => {
           <h1 className="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl animate-fade-in">
             About InvoiceNest
           </h1>
-          <p className="mt-6 text-xl text-[#E8F6F3] max-w-3xl mx-auto">
+          <p className="mt-6 text-xl text-[#E8F6F3] max-w-3xl mx-auto  animate-fade-in" style={{animationDelay: '0.1s'}}>
             InvoiceNest empowers over 50,000 businesses in 150+ countries to get paid faster and manage their finances with ease. Our platform has processed more than 1 million invoices, helping companies of all sizes save time, improve cash flow, and deliver a seamless experience to their clients. With a 99% customer satisfaction rate, InvoiceNest is trusted by modern businesses for its simplicity, security, and innovation.
           </p>
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 w-full max-w-2xl mx-auto">
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 w-full max-w-2xl mx-auto animate-fade-in" style={{animationDelay: '0.2s'}}>
             <div className="text-center">
               <div className="text-2xl font-bold text-white">50,000+</div>
               <div className="text-[#E8F6F3] text-sm">Businesses</div>
@@ -105,6 +91,42 @@ const About = () => {
         </div>
       </div>
 
+      {/* Our Core Values Section */}
+      <div className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-extrabold text-[#2C3E50] sm:text-5xl animate-fade-in">
+              Our Core <span className="text-[#1ABC9C]">Values</span>
+            </h2>
+            <p className="mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto  animate-fade-in" style={{animationDelay: '0.1s'}}>
+              The principles that guide our mission and drive our success.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {values.map((value, idx) => (
+              <div 
+                key={value.title} 
+                className="group relative bg-gradient-to-br from-[#F8F9FA] to-[#E8F6F3] rounded-2xl shadow-lg p-8 text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in"
+                style={{ animationDelay: `${idx * 0.1 + 0.2}s` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1ABC9C] to-[#16A085] opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300" />
+                <div className="relative">
+                  <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-[#1ABC9C] to-[#16A085] text-white mb-6 shadow-md">
+                    <value.icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#2C3E50] mb-3 group-hover:text-[#1ABC9C] transition-colors duration-300">
+                    {value.title}
+                  </h3>
+                  <p className="text-[#7F8C8D] leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
       {/* What Sets Us Apart */}
       <div className="py-24 bg-gradient-to-br from-[#F0F9F7] via-[#E8F6F3] to-[#E3F4F1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,17 +134,21 @@ const About = () => {
             <h2 className="text-4xl font-extrabold text-[#2C3E50] sm:text-5xl animate-fade-in">
               What Sets <span className="text-[#1ABC9C]">Us Apart</span>
             </h2>
-            <p className="mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto">
-              Discover the values and features that make InvoiceNest the preferred choice for modern businesses.
+            <p className="mt-4 text-xl text-[#7F8C8D] max-w-3xl mx-auto animate-fade-in" style={{animationDelay: '0.1s'}}>
+              Discover the features and commitments that make InvoiceNest the preferred choice.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {differentiators.map((item, idx) => (
-              <div key={item.title} className="group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1ABC9C] to-[#16A085] opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300" />
+              <div 
+                key={item.title} 
+                className="group relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in" 
+                style={{ animationDelay: `${idx * 0.1 + 0.2}s` }}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br from-[#1ABC9C] to-[#16A085] opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`} />
                 <div className="relative">
-                  <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#1ABC9C] to-[#16A085] mb-6">
-                    <item.icon className="h-6 w-6 text-white" />
+                  <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br from-[#1ABC9C] to-[#16A085] text-white mb-6`}>
+                    <item.icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold text-[#2C3E50] mb-3 group-hover:text-[#1ABC9C] transition-colors duration-300">{item.title}</h3>
                   <p className="text-[#7F8C8D] leading-relaxed">{item.desc}</p>

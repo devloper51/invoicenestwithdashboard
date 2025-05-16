@@ -89,10 +89,10 @@ const Subscription = () => {
         <div className="relative bg-white rounded-lg p-0.5 flex">
           <button
             type="button"
-            className={`$ {
+            className={`${
               billingCycle === 'monthly'
                 ? 'bg-[#1ABC9C] text-white'
-                : 'text-[#2C3E50]'
+                : 'text-[#2C3E50] hover:bg-gray-100'
             } relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:z-10 sm:w-auto sm:px-8`}
             onClick={() => setBillingCycle('monthly')}
           >
@@ -100,10 +100,10 @@ const Subscription = () => {
           </button>
           <button
             type="button"
-            className={`$ {
+            className={`${
               billingCycle === 'yearly'
                 ? 'bg-[#1ABC9C] text-white'
-                : 'text-[#2C3E50]'
+                : 'text-[#2C3E50] hover:bg-gray-100'
             } relative w-1/2 rounded-md py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:z-10 sm:w-auto sm:px-8`}
             onClick={() => setBillingCycle('yearly')}
           >
